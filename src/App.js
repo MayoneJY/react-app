@@ -34,19 +34,27 @@ function Article(props){
 </article>
 }
 function App() {
+  const mode = 'WELCOME';
   const topics = [
     {id:1, title:'html', bodt:'html is ...'},
     {id:2, title:'css', bodt:'css is ...'},
     {id:3, title:'javascript', bodt:'javascript is ...'}
   ]
+  let content = null;
+  if(mode === 'WELCOME'){
+    content = <Article title="Welcome" body="Hello, WEB"></Article>
+  } else if(mode === 'READ'){
+    content = <Article title="Read" body="Hello, Read"></Article>
+  }
   return (
     <div>
-      <Header title="REACT" onChangeMode={()=>{alert("Header");}}></Header>
+      <Header title="REACT" onChangeMode={()=>{
+        mode = 'WELCOME'
+      }}></Header>
       <Nev topics={topics} onChangeMode={(id)=>{
-        alert(id);
+        mode = 'READ'
       }}></Nev>
-      <Article title="Welcome" body="Hello, WEB"></Article>
-      <Article title="Hi" body="Hello, React"></Article>
+      {content}
     </div>
   );
 }
